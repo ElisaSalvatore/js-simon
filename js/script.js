@@ -34,24 +34,26 @@ setTimeout(function (){
     containerHtml.remove(outputNumbers);
     
     //far appararire un prompt per ogni numero in cui viene chiesto all'untente di inserire i numeri memorizzati 
-    const number1 = parseInt(prompt('Inserisci il primo numero della sequenza: '));
-    const number2 = parseInt(prompt('Inserisci il secondo numero della sequenza: '));
-    const number3 = parseInt(prompt('Inserisci il terzo numero della sequenza: '));
-    const number4 = parseInt(prompt('Inserisci il quarto numero della sequenza: '));
-    const number5 = parseInt(prompt('Iinserisci il quinto numero della sequenza: '));
+    const number1 = parseInt(prompt('Inserisci il PRIMO numero della sequenza: '));
+    const number2 = parseInt(prompt('Inserisci il SECONDO numero della sequenza: '));
+    const number3 = parseInt(prompt('Inserisci il TERZO numero della sequenza: '));
+    const number4 = parseInt(prompt('Inserisci il QUARTA numero della sequenza: '));
+    const number5 = parseInt(prompt('Iinserisci il QUINTO numero della sequenza: '));
     
-    const userNumbersArray = [number1,number2,number3, number4, number5]
+    // verifica dei numeri inseriti dall'utente
+    const userNumbersArray = [number1,number2,number3, number4, number5];
     console.log(userNumbersArray);
-    
-    //verifica dei numeri inseriti dall'utente
-    // if (userNumbersArray[i] === simonNumbersArray[i]){
-    //     console.log('L\'utente ha inserito la giusta sequenza.')
-    //     ouputWinner.innerHTML += 'Complimenti, hai inserito la corretta sequenza di numeri!'
-    // } else {
-    //     console.log('L\'utente ha inserito un\'errata sequenza.')
-    //     ouputWinner.innerHTML += 'Riprova, non hai inserito la corretta sequenza di numeri.'
-    // };
-},3000);
+
+    if (userNumbersArray[i] === simonNumbersArray[i]) {
+        console.log('L\'utente ha inserito la giusta sequenza.')
+        ouputWinner.innerHTML += 'Complimenti, hai inserito la corretta sequenza di numeri!'
+        
+    } else {
+        console.log('L\'utente ha inserito un\'errata sequenza.')
+        ouputWinner.innerHTML += 'Riprova, non hai inserito la corretta sequenza di numeri.';
+    };
+
+},30000);
 
 
 
