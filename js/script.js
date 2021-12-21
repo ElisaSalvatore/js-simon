@@ -9,6 +9,9 @@
 const containerHtml = document.querySelector('.container');
 const outputNumbers = document.querySelector('.numbers');
 const simonNumbers = [];
+const userNumbers = []; 
+let i;
+
 
 //funzione per generare numeri random
 function getRandom(min, max) {
@@ -29,9 +32,20 @@ console.log(simonNumbers);
 //dopo 30sec far sparire i numeri utilizzando una timing function
 setTimeout(function (){
     containerHtml.remove(outputNumbers);
+    
     //far appararire un prompt in cui viene chiesto all'untente di inserire i numeri memorizzati 
-    const storedNumber = prompt('Inserisci la sequenza di numeri (rispetta la punteggiatura): ');
+    const userNumbers = prompt('Inserisci la sequenza di numeri (lascia uno spazio tra un numero e l\'altro): ');
+    const splitUser = userNumbers.split(' ');
+    console.log(splitUser)
+
+    //verifica dei numeri inseriti dall'utente
+    // const splitSimon = simonNumbers.split(' ');
+    // console.log(splitSimon)
+    if (splitUser == simonNumbers) {
+        console.log('hai vinto')
+    } else {
+        console.log('hai perso')
+    };
 },3000);
 
-//verifica dei numeri inseiriti dall'utente
 
