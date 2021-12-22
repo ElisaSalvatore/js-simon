@@ -17,10 +17,6 @@ const simonNumbersArray = [];
 let userInsertNumbers = [];
 let userCorrectNumbers = 0;
 
-// function newGame(randomNumber){  
-
-// };
-
 //FUNZIONE per generare numeri random
 function getRandom(min, max) {
     return Math.round(Math.random() * (max - min) + min);
@@ -70,23 +66,17 @@ setTimeout(function (){
         outputNumbers.innerHTML += simonNumbersArray;
         outputScore.innerHTML = `Hai indovinato ${userCorrectNumbers} numeri! La sequenza da te inserita è: ${(userInsertNumbers + ' ')}`;
 
-        //verifica dei numeri inseriti dall'utente, se l'utente ha indovinato TUTTI i 5 numeri della sequenza iniziale
+        //VERIFICA dei numeri inseriti dall'utente, se l'utente ha indovinato TUTTI i 5 numeri della sequenza iniziale
         // Utilizzando join() trasformo i due array in stringhe: inserirsco una virgola come separatore tra gli elementi e 
         // confronto la similarità delle due stringhe
-        if ( userInsertNumbers.join(',') ===  simonNumbersArray.join(',')) {
+        if (userInsertNumbers.join(',') === simonNumbersArray.join(',')) {
             console.log('L\'utente ha inserito la giusta sequenza.')
             outputWinner.innerHTML += 'Complimenti, hai inserito la corretta sequenza di numeri!'
-            
         } else {
             console.log('L\'utente ha inserito un\'errata sequenza.')
-            outputWinner.innerHTML += 'Riprova, non hai inserito la corretta sequenza di numeri.';
-        };      
+            outputWinner.innerHTML += 'Prova ad inserire la corretta sequenza di numeri.';
+        };
         
     }, 500);
 
 }, 3000);
-
-// Capire quale funzione inserire per resettare la partita
-// buttonNewGame.addEventListener('click', function(){
-//     newGame(randomNumber);
-// });
