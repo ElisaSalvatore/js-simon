@@ -5,60 +5,85 @@
 //Dopo che sono stati inseriti i 5 numeri, il software dice quanti 
 // e quali dei numeri da indovinare sono stati individuati.
 
-//costanti e variabili per generare 5 numeri random
+//costanti e variabili su HTML
 const containerHtml = document.querySelector('.container');
 const outputNumbers = document.querySelector('.numbers');
-const ouputWinner = document.querySelector('.winner');
+const outputScore = document.querySelector('.score');
+const outputWinner = document.querySelector('.winner');
+const buttonNewGame = document.querySelector('.button');
 
 const simonNumbersArray = [];
-let i;
 
-//funzione per generare numeri random
+//FUNZIONE per generare numeri random
 function getRandom(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 };
 
-//ciclo per stampare in pagina numeri random univoci da 1 a 100
+// function newGame(randomNumber){  
+// };
+
+//GENERARE 5 NUMERI RANDOM
 while (simonNumbersArray.length < 5) {
     const randomNumber = getRandom (1, 100);
 
+    //se il randomNumber generato (!) NON è incluso in simonNumbersArray allora pushalo al suo interno
     if (!simonNumbersArray.includes(randomNumber)) {
         simonNumbersArray.push(randomNumber);
     };
 };
-outputNumbers.innerHTML = (simonNumbersArray);
+//STAMPARE IN PAGINA I 5 NUMERI GENERATI
+//aggiungere il contatore per incrementare l'array che contiene i numeri random (generarti dalla funzione getRandom)
+for (let i = 0; i < simonNumbersArray.length; i++) {
+    outputNumbers.innerHTML += simonNumbersArray[i] + ' ';
+}
 console.log(simonNumbersArray);
 
+//TIMING FUNCTIONS PER GESTIRE I SECONDI DI RITARDO DI ALCUNE AZIONI
 //dopo 30sec far sparire i numeri utilizzando una timing function
 setTimeout(function (){
-    containerHtml.remove(outputNumbers);
-    
-    //far appararire un prompt per ogni numero in cui viene chiesto all'untente di inserire i numeri memorizzati 
-    const number1 = parseInt(prompt('Inserisci il PRIMO numero della sequenza: '));
-    const number2 = parseInt(prompt('Inserisci il SECONDO numero della sequenza: '));
-    const number3 = parseInt(prompt('Inserisci il TERZO numero della sequenza: '));
-    const number4 = parseInt(prompt('Inserisci il QUARTA numero della sequenza: '));
-    const number5 = parseInt(prompt('Iinserisci il QUINTO numero della sequenza: '));
-    
-    // verifica dei numeri inseriti dall'utente
-    const userNumbersArray = [number1,number2,number3, number4, number5];
-    console.log(userNumbersArray);
+    //.innerHTML VUOTO per cancellare il contenuto della pagina
+    outputNumbers.innerHTML = ' ';
 
-    if (userNumbersArray[i] === simonNumbersArray[i]) {
-        console.log('L\'utente ha inserito la giusta sequenza.')
-        ouputWinner.innerHTML += 'Complimenti, hai inserito la corretta sequenza di numeri!'
+    setTimeout(function (){
+        //far appararire un prompt per ogni numero in cui viene chiesto all'untente di inserire i numeri memorizzati 
+        // oppure creare un contatore che ripeta l'azione del prompt per 5 volte (n random = n da inserire)
+        let userInsertNumbers = [];
+        let userCorrectNumbers = 0;
         
-    } else {
-        console.log('L\'utente ha inserito un\'errata sequenza.')
-        ouputWinner.innerHTML += 'Riprova, non hai inserito la corretta sequenza di numeri.';
-    };
+        for (i = 0; i < 5; i++) {
+            const userAnswer = parseInt(prompt('Inserisci un numero della sequenza: '));
+            //SE l'userAnswer è presente nella simonSaysArray E SE NON è incluso nella lista userInsertNumber, allora 
+            // aggiungi il numero inserito incrementando la lista userCorrectNumbers
 
-},30000);
+            if (simonNumbersArray.includes(userAnswer) && !userInsertNumbers.includes(userAnswer)){
+                userCorrectNumbers++;
+            };
+            //in generale se i numeri inseriti (userAnswer) sono presenti o meno nella sequenza iniziale, 
+            // sono comunque da aggiungere alla lista userInsertNumbers: 
+            // in modo da verificare QUANTI numeri inseriti dall'utente sono corretti
+            userInsertNumbers.push(userAnswer);
+            console.log(userAnswer);
+        };
+        
+        //mostrare nuovamente in pagina i numeri della sequenza inziale da memorizzare ed il punteggio (quanti numeri l'utente ha indovinato)
+        outputNumbers.innerHTML += simonNumbersArray;
+        outputScore.innerHTML = `Hai indovinato ${userCorrectNumbers} numeri! La sequenza da te memorizzata è: ${(userInsertNumbers + ' ')}`;
 
+        // verifica dei numeri inseriti dall'utente, se l'utente ha indovinato 5 numeri
+        if (userInsertNumbers[i] === simonNumbersArray[i]) {
+            console.log('L\'utente ha inserito la giusta sequenza.')
+            outputWinner.innerHTML += 'Complimenti, hai inserito la corretta sequenza di numeri!'
+            
+        } else {
+            console.log('L\'utente ha inserito un\'errata sequenza.')
+            outputWinner.innerHTML += 'Riprova, non hai inserito la corretta sequenza di numeri.';
+        };      
+        
+    }, 500);
 
+}, 3000);
 
-
-
-
-
-
+// Capire quale funzione inserire per resettare la partita
+// buttonNewGame.addEventListener('click', function(){
+//     outputNumbers.innerHTML = newGame(randomNumber);
+// });

@@ -31,6 +31,10 @@ body {
     font-weight: 700;
 }
 
+.score, .winner {
+    margin: 20px;
+}
+
 .button {
     margin: 20px auto;
     width: 150px;
